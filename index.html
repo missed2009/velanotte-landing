@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vela Notte — Maschera al Collagene Notturna</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nero: #100D1A;
+    --viola: #1C1630;
+    --rosa: #D4849C;
+    --rosa-chiaro: #F2C8D8;
+    --oro: #C9A96E;
+    --bianco: #FAF7F5;
+    --grigio: #8B8590;
+    --bg: #0F0B18;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--bianco); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+  /* ── BANNER ── */
+  .top-bar {
+    background: linear-gradient(90deg, #8B2252, #C97090, #8B2252);
+    background-size: 200%;
+    animation: shimmer 3s linear infinite;
+    color: white;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  @keyframes shimmer { 0%{background-position:0%} 100%{background-position:200%} }
+
+  /* ── HEADER ── */
+  header {
+    padding: 18px 24px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    letter-spacing: 4px;
+    color: var(--bianco);
+    text-transform: uppercase;
+  }
+  .logo span { color: var(--rosa); }
+  .logo-sub { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--oro); text-transform: uppercase; text-align: center; margin-top: 3px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 44px 24px 32px;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--oro);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 6vw, 46px);
+    line-height: 1.2;
+    margin-bottom: 18px;
+    color: var(--bianco);
+  }
+  .hero h1 em { color: var(--rosa); font-style: italic; }
+  .hero p {
+    font-size: 16px;
+    color: #B0A8B4;
+    line-height: 1.75;
+    max-width: 500px;
+    margin: 0 auto 28px;
+  }
+
+  /* ── WATCHERS ── */
+  .watchers {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 30px;
+    padding: 7px 16px;
+    font-size: 13px;
+    color: #C0B8C4;
+    margin-bottom: 20px;
+  }
+  .watcher-dot { width: 8px; height: 8px; border-radius: 50%; background: #4CAF50; display: inline-block; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* ── VIDEO ── */
+  .video-wrap {
+    max-width: 380px;
+    margin: 0 auto 32px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(180,100,130,0.25);
+    border: 1px solid rgba(212,132,156,0.2);
+  }
+  .video-wrap video { width: 100%; display: block; }
+
+  /* ── PRICE BOX ── */
+  .price-box {
+    background: linear-gradient(145deg, var(--viola), #251A38);
+    border: 1px solid rgba(212,132,156,0.3);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto 16px;
+  }
+  .qty-selector {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .qty-option {
+    flex: 1;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 12px;
+    color: var(--grigio);
+  }
+  .qty-option.selected {
+    border-color: var(--rosa);
+    background: rgba(212,132,156,0.1);
+    color: var(--bianco);
+  }
+  .qty-option .qty-num { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; display: block; color: var(--bianco); }
+  .qty-option .qty-price { color: var(--rosa); font-weight: 600; font-size: 13px; }
+  .qty-option .qty-label { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .qty-option.best .qty-label { color: var(--oro); }
+  .price-old { font-size: 16px; color: var(--grigio); text-decoration: line-through; margin-bottom: 2px; }
+  .price-new {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    color: var(--bianco);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-badge {
+    display: inline-block;
+    background: var(--rosa);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+  .cta-btn {
+    display: block;
+    background: linear-gradient(135deg, #C97090, #A0405A);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 18px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 30px rgba(160,64,90,0.5);
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(160,64,90,0.6); }
+  .guarantee-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--grigio);
+    margin-top: 12px;
+  }
+  .guarantee-line strong { color: #9AD69A; }
+
+  /* ── SCARCITY ── */
+  .scarcity {
+    background: rgba(201,169,110,0.07);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 12px;
+    padding: 12px 20px;
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: var(--oro);
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .progress-bar-wrap { background: rgba(255,255,255,0.08); border-radius: 4px; height: 6px; margin-top: 8px; }
+  .progress-bar { background: linear-gradient(90deg, var(--oro), var(--rosa)); height: 6px; border-radius: 4px; width: 74%; transition: width 0.5s; }
+
+  /* ── TRUST ── */
+  .trust-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 24px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .trust-item { text-align: center; font-size: 12px; color: var(--grigio); }
+  .trust-item .icon { font-size: 20px; margin-bottom: 4px; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 60px 24px; max-width: 680px; margin: 0 auto; }
+  .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--oro); margin-bottom: 10px; text-align: center; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 5vw, 34px);
+    text-align: center;
+    margin-bottom: 36px;
+    line-height: 1.3;
+  }
+
+  /* ── PER CHI E' ── */
+  .forwhom-grid { display: flex; flex-direction: column; gap: 12px; }
+  .forwhom-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: #C0B8C4;
+    line-height: 1.5;
+  }
+  .forwhom-check { color: var(--rosa); font-size: 18px; flex-shrink: 0; }
+
+  /* ── BENEFITS ── */
+  .benefits-grid { display: flex; flex-direction: column; gap: 16px; }
+  .benefit-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .benefit-icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+  .benefit-title { font-weight: 600; margin-bottom: 5px; color: var(--bianco); font-size: 15px; }
+  .benefit-desc { font-size: 13px; color: #9A929E; line-height: 1.6; }
+  .benefit-stat { font-size: 12px; color: var(--rosa); font-weight: 600; margin-top: 4px; }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 22px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rosa), #A0405A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-title { font-weight: 600; margin-bottom: 4px; font-size: 15px; }
+  .step-desc { font-size: 13px; color: #9A929E; line-height: 1.5; }
+
+  /* ── BEFORE/AFTER ── */
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ba-card { border-radius: 16px; padding: 22px 18px; text-align: center; }
+  .ba-card.before { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+  .ba-card.after { background: linear-gradient(135deg, rgba(212,132,156,0.15), rgba(160,64,90,0.08)); border: 1px solid rgba(212,132,156,0.3); }
+  .ba-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; color: var(--grigio); }
+  .ba-card.after .ba-label { color: var(--rosa); }
+  .ba-emoji { font-size: 30px; margin-bottom: 10px; }
+  .ba-text { font-size: 13px; line-height: 1.6; color: #9A929E; }
+  .ba-card.after .ba-text { color: var(--bianco); }
+
+  /* ── REVIEWS ── */
+  .reviews { display: flex; flex-direction: column; gap: 14px; }
+  .review-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .review-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--rosa), #6B2A40); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+  .review-stars { color: var(--oro); font-size: 13px; margin-bottom: 2px; }
+  .review-name-row { display: flex; align-items: center; gap: 6px; }
+  .review-name { font-size: 13px; font-weight: 600; color: var(--bianco); }
+  .review-badge { font-size: 10px; color: #4CAF50; background: rgba(76,175,80,0.12); padding: 2px 7px; border-radius: 8px; }
+  .review-text { font-size: 14px; color: #C0B8C4; line-height: 1.65; font-style: italic; }
+
+  /* ── FAQ ── */
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 0; }
+  .faq-q {
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--bianco);
+    user-select: none;
+  }
+  .faq-arrow { color: var(--rosa); font-size: 18px; transition: transform 0.2s; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-a { font-size: 14px; color: #9A929E; line-height: 1.7; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ── GARANZIA ── */
+  .guarantee-box {
+    background: linear-gradient(135deg, rgba(76,175,80,0.08), rgba(76,175,80,0.03));
+    border: 1px solid rgba(76,175,80,0.2);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .guarantee-box .g-icon { font-size: 36px; margin-bottom: 10px; }
+  .guarantee-box h3 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; color: #9AD69A; }
+  .guarantee-box p { font-size: 13px; color: #9A929E; line-height: 1.6; }
+
+  /* ── CTA FINALE ── */
+  .cta-final {
+    background: linear-gradient(180deg, var(--viola) 0%, #100D1A 100%);
+    border-top: 1px solid rgba(212,132,156,0.15);
+    padding: 60px 24px 40px;
+    text-align: center;
+  }
+  .cta-final h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 5vw, 34px);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .cta-final p { color: #9A929E; font-size: 15px; margin-bottom: 28px; }
+
+  /* ── STICKY CTA MOBILE ── */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(16,13,26,0.97);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(212,132,156,0.2);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    z-index: 999;
+  }
+  .sticky-price { font-family: 'Playfair Display', serif; font-size: 20px; }
+  .sticky-price small { font-size: 12px; color: var(--grigio); text-decoration: line-through; font-family: 'Inter', sans-serif; display: block; }
+  .sticky-btn {
+    background: linear-gradient(135deg, #C97090, #A0405A);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 14px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 32px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+    color: var(--grigio);
+  }
+  footer .logo-small { font-family: 'Playfair Display', serif; font-size: 18px; letter-spacing: 3px; color: var(--bianco); margin-bottom: 10px; }
+  .footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 12px; flex-wrap: wrap; }
+  .footer-links a { color: var(--grigio); text-decoration: none; font-size: 12px; }
+
+  @media(min-width: 640px) {
+    .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .sticky-cta { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="top-bar">⚡ VIRALE SU TIKTOK · Spedizione tracciata gratuita · Oltre 500 ordini questa settimana</div>
+
+<!-- HEADER -->
+<header>
+  <div style="display:flex;flex-direction:column;align-items:center;">
+    <div class="logo">Vela <span>Notte</span></div>
+    <div class="logo-sub">by Hoygi</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">✦ Skincare Coreana · Glass Skin ✦</p>
+  <h1>Pelle di porcellana<br>in una notte.<br><em>Applica, dormi, stacca.</em></h1>
+  <p>La maschera al collagene che forma un film invisibile e trasforma la tua pelle mentre dormi. Nessuno sforzo. Risultati visibili dalla prima mattina.</p>
+  <div class="watchers">
+    <span class="watcher-dot"></span>
+    <span id="watchers-count">14</span> persone stanno guardando questo prodotto ora
+  </div>
+</div>
+
+<!-- VIDEO -->
+<div class="video-wrap" style="max-width:360px;margin:0 auto 16px;">
+  <video autoplay muted loop playsinline>
+    <source src="assets/video.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- FOTO HERO — ragazza che stacca il film -->
+<div style="max-width:480px;margin:0 auto 28px;border-radius:16px;overflow:hidden;box-shadow:0 16px 48px rgba(180,100,130,0.2);">
+  <img src="assets/foto5.jpg" alt="Maschera al Collagene Notturna — applica e stacca" style="width:100%;display:block;">
+</div>
+
+<!-- PRICE BOX -->
+<div style="padding: 0 24px; max-width: 680px; margin: 0 auto;">
+  <div class="price-box">
+    <!-- QUANTITY SELECTOR -->
+    <div class="qty-selector">
+      <div class="qty-option selected" onclick="selectQty(this, '€16,90', '29,90')">
+        <span class="qty-num">1</span>
+        <span class="qty-price">€16,90</span>
+        <span class="qty-label">Prova</span>
+      </div>
+      <div class="qty-option best" onclick="selectQty(this, '€27,90', '49,90')">
+        <span class="qty-num">2</span>
+        <span class="qty-price">€27,90</span>
+        <span class="qty-label">⭐ Best</span>
+      </div>
+      <div class="qty-option" onclick="selectQty(this, '€34,90', '69,90')">
+        <span class="qty-num">3</span>
+        <span class="qty-price">€34,90</span>
+        <span class="qty-label">Scorta</span>
+      </div>
+    </div>
+
+    <p class="price-old" id="price-old">€29,90</p>
+    <p class="price-new" id="price-new">€16,90</p>
+    <span class="price-badge">-43% · SOLO OGGI</span>
+    <a href="https://an1i5s-vn.myshopify.com/cart/53570563113301:1" class="cta-btn" id="cta-main">ORDINA ORA — €16,90</a>
+    <div class="guarantee-line">
+      <span>🛡️</span>
+      <span><strong>Soddisfatta o rimborsata — 30 giorni</strong> · Pagamento sicuro · Spedizione tracciata</span>
+    </div>
+  </div>
+
+  <!-- SCARCITY -->
+  <div class="scarcity">
+    <strong>⚡ Ultimi 47 pezzi disponibili</strong> · 312 ordini questa settimana
+    <div class="progress-bar-wrap"><div class="progress-bar"></div></div>
+  </div>
+</div>
+
+<!-- TRUST BADGES -->
+<div class="trust-row">
+  <div class="trust-item"><div class="icon">🚚</div>Spedizione<br>tracciata</div>
+  <div class="trust-item"><div class="icon">🔒</div>Pagamento<br>sicuro</div>
+  <div class="trust-item"><div class="icon">🛡️</div>Rimborso<br>30 giorni</div>
+</div>
+
+<!-- PER CHI E' -->
+<div class="section">
+  <p class="section-label">È fatta per te se...</p>
+  <h2 class="section-title">Ti riconosci in<br><em style="color:var(--rosa);font-family:'Playfair Display',serif;">almeno uno</em> di questi?</h2>
+  <div class="forwhom-grid">
+    <div class="forwhom-item"><span class="forwhom-check">✓</span> Hai la pelle spenta e stanca dopo una giornata di lavoro o schermo</div>
+    <div class="forwhom-item"><span class="forwhom-check">✓</span> Al mattino hai sempre la faccia stropicciata e devi aspettare ore prima di sembrare sveglia</div>
+    <div class="forwhom-item"><span class="forwhom-check">✓</span> Hai provato creme notturne ma ungono il cuscino e non le usi mai</div>
+    <div class="forwhom-item"><span class="forwhom-check">✓</span> Hai un evento importante e vuoi la pelle al massimo la mattina dopo</div>
+    <div class="forwhom-item"><span class="forwhom-check">✓</span> Ami la skincare coreana e vuoi un rituale serale soddisfacente</div>
+  </div>
+</div>
+
+<!-- BENEFICI -->
+<div class="section" style="padding-top:0;">
+  <p class="section-label">Perché funziona</p>
+  <h2 class="section-title">La scienza dietro<br>la <em style="color:var(--rosa);font-family:'Playfair Display',serif;">Glass Skin</em></h2>
+  <!-- Infografica benefici -->
+  <div style="border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(180,100,130,0.18);margin-bottom:32px;">
+    <img src="assets/foto8_it.jpg" alt="4 benefici Maschera al Collagene Notturna" style="width:100%;display:block;">
+  </div>
+  <!-- Cards benefici extra -->
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">💧</div>
+      <div>
+        <div class="benefit-title">Idratazione Profonda 8h</div>
+        <div class="benefit-desc">Il film sigilla l'umidità per tutta la notte, senza sporcare il cuscino.</div>
+        <div class="benefit-stat">+147% di idratazione vs crema normale</div>
+      </div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🎬</div>
+      <div>
+        <div class="benefit-title">0 Macchie sul Cuscino</div>
+        <div class="benefit-desc">Il gel diventa film invisibile in 3 minuti. Nessuno sporco, nessun problema.</div>
+        <div class="benefit-stat">Tecnologia Invisible Film</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COME SI USA -->
+<div style="background: linear-gradient(135deg, var(--viola), #130F20); padding: 60px 24px;">
+  <div style="max-width:680px; margin:0 auto;">
+    <p class="section-label">Semplicissima</p>
+    <h2 class="section-title">Come si usa</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Applica la sera</div>
+          <div class="step-desc">Stendi il gel sul viso pulito con il pennellino incluso. 60 secondi e sei pronta per dormire.</div>
+          <div style="margin-top:12px;border-radius:12px;overflow:hidden;max-width:260px;">
+            <img src="assets/foto9.jpg" alt="Kit pennello incluso" style="width:100%;display:block;border-radius:12px;">
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Dormi tranquilla</div>
+          <div class="step-desc">Il film invisibile lavora per tutta la notte. Non unge, non macchia il cuscino, non si muove.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Stacca e ammira</div>
+          <div class="step-desc">Al mattino solleva i bordi e rimuovi il film in un unico pezzo. Quel gesto soddisfacente. Quella pelle radiosa.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BEFORE/AFTER -->
+<div class="section">
+  <p class="section-label">La differenza</p>
+  <h2 class="section-title" style="margin-bottom:20px;">Prima e <em style="color:var(--rosa);font-family:'Playfair Display',serif;">Dopo</em></h2>
+  <!-- Foto prima/dopo reale -->
+  <div style="border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(180,100,130,0.18);margin-bottom:20px;">
+    <img src="assets/foto10_it.jpg" alt="Pelle prima e dopo la Maschera al Collagene" style="width:100%;display:block;">
+  </div>
+</div>
+
+<!-- GALLERIA PRODOTTO -->
+<div class="section" style="padding-top:0;padding-bottom:20px;">
+  <p class="section-label">Il Prodotto</p>
+  <h2 class="section-title" style="margin-bottom:20px;">Risultati <em style="color:var(--rosa);font-family:'Playfair Display',serif;">reali</em></h2>
+  <div style="border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(180,100,130,0.18);">
+    <img src="assets/foto6.jpg" alt="Risultati pelle Maschera al Collagene Notturna" style="width:100%;display:block;">
+  </div>
+</div>
+
+<!-- RECENSIONI -->
+<div class="section" style="padding-top:0;">
+  <p class="section-label">Lo dicono le clienti</p>
+  <h2 class="section-title" style="margin-bottom:24px;">+500 donne hanno già<br>scelto Vela Notte</h2>
+  <div class="reviews">
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#C97090,#6B2A40)">C</div>
+        <div>
+          <div class="review-name-row">
+            <span class="review-name">Chiara M.</span>
+            <span class="review-badge">✓ Verificato</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-text">"Ero scettica. La prima mattina ho staccato il film e la pelle era liscia in modo assurdo. Non ci credevo. Mia sorella me l'ha già rubata, sto comprando le 3 pezze."</div>
+    </div>
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#9070C9,#2A1A6B)">V</div>
+        <div>
+          <div class="review-name-row">
+            <span class="review-name">Valentina R.</span>
+            <span class="review-badge">✓ Verificato</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="review-text">"Avevo paura che ungesse il cuscino come le maschere normali. Invece no — si asciuga davvero, la mattina il film si stacca perfetto e la pelle non tira. Lo consiglio a tutte."</div>
+    </div>
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar" style="background:linear-gradient(135deg,#C9A970,#6B4A1A)">E</div>
+        <div>
+          <div class="review-name-row">
+            <span class="review-name">Elena S.</span>
+            <span class="review-badge">✓ Verificato</span>
+          </div>
+          <div class="review-stars">★★★★☆</div>
+        </div>
+      </div>
+      <div class="review-text">"Lo uso due volte a settimana. In 2 settimane la pelle è visibilmente più luminosa. Unico neo: ci metto un po' ad applicarla bene, ma si impara subito."</div>
+    </div>
+  </div>
+</div>
+
+<!-- GARANZIA -->
+<div style="padding: 0 24px 60px; max-width: 680px; margin: 0 auto;">
+  <div class="guarantee-box">
+    <div class="g-icon">🛡️</div>
+    <h3>Soddisfatta o Rimborsata</h3>
+    <p>Se nei <strong style="color:#9AD69A">30 giorni</strong> dall'acquisto non sei soddisfatta del risultato, ti rimborsiamo senza domande. Zero rischi per te.</p>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="section" style="padding-top:0;">
+  <p class="section-label">Domande frequenti</p>
+  <h2 class="section-title" style="margin-bottom:28px;">Hai dubbi?<br>Ti rispondiamo subito.</h2>
+  <div class="faq-item open">
+    <div class="faq-q" onclick="toggleFaq(this)">Macchia il cuscino? <span class="faq-arrow">+</span></div>
+    <div class="faq-a">No. Il gel si asciuga in 3 minuti formando un film trasparente fisso sul viso. Il cuscino rimane perfettamente pulito — è uno dei motivi per cui la usano di notte senza pensieri.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Quante volte a settimana? <span class="faq-arrow">+</span></div>
+    <div class="faq-a">Consigliamo 2-3 volte per i migliori risultati. È sicura anche per un uso quotidiano se hai la pelle che ne ha bisogno.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Va bene per pelli sensibili? <span class="faq-arrow">+</span></div>
+    <div class="faq-a">Sì, la formula è delicata e senza profumo. Se hai pelle molto reattiva, fai un piccolo test sul collo la prima volta.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Quanto tempo in posa? <span class="faq-arrow">+</span></div>
+    <div class="faq-a">Almeno 6-7 ore (una notte intera). Al mattino si rimuove tirando delicatamente i bordi — esce in un pezzo solo, è quasi terapeutico.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Quando vedo i risultati? <span class="faq-arrow">+</span></div>
+    <div class="faq-a">La maggior parte delle clienti nota differenza dalla prima mattina. La pelle è più morbida, luminosa e rimpolpata. I risultati migliorano settimana dopo settimana.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)">Come avviene la spedizione? <span class="faq-arrow">+</span></div>
+    <div class="faq-a">Spediamo in 24h lavorative. Il pacco arriva in 5-9 giorni con tracciamento completo. Riceverai il numero di tracking via email appena il pacco parte.</div>
+  </div>
+</div>
+
+<!-- CTA FINALE -->
+<div class="cta-final" id="ordina">
+  <h2>Inizia stanotte.<br>Svegliati <em style="color:var(--rosa);">diversa</em> domani.</h2>
+  <p>Unisciti a oltre 500 donne che hanno già scelto la loro pelle migliore.</p>
+  <div style="max-width:400px;margin:0 auto;">
+    <div class="price-box" style="margin-bottom:16px;">
+      <p class="price-old">€29,90</p>
+      <p class="price-new">€16,90</p>
+      <span class="price-badge">Spedizione gratuita inclusa</span>
+      <a href="https://an1i5s-vn.myshopify.com/cart/53570563113301:1" class="cta-btn" style="margin-top:16px;">ORDINA ORA — €16,90</a>
+      <div class="guarantee-line" style="margin-top:14px;">
+        <span>🛡️</span><span><strong>Rimborso 30 giorni</strong> · Pagamento sicuro · Shopify</span>
+      </div>
+    </div>
+    <div class="scarcity">⚡ Solo <strong>47 pezzi</strong> ancora disponibili</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="padding-bottom: 90px;">
+  <div class="logo-small">Vela Notte</div>
+  <p>© 2026 Vela Notte · <a href="https://wa.me/39XXXXXXXXXX" style="color:var(--rosa);text-decoration:none;">💬 Supporto clienti</a></p>
+  <p style="margin-top:6px;font-size:11px;">I risultati possono variare da persona a persona.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Rimborsi</a>
+    <a href="#">Contatti</a>
+  </div>
+</footer>
+
+<!-- STICKY CTA MOBILE -->
+<div class="sticky-cta">
+  <div class="sticky-price">
+    <small>€29,90</small>
+    €16,90
+  </div>
+  <a href="#ordina" class="sticky-btn">ORDINA ORA</a>
+</div>
+
+<script>
+// Qty selector
+function selectQty(el, newPrice, oldPrice) {
+  document.querySelectorAll('.qty-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('price-new').textContent = newPrice;
+  document.getElementById('price-old').textContent = '€' + oldPrice;
+  const amount = newPrice.replace('€','').replace(',','.');
+  document.getElementById('cta-main').textContent = 'ORDINA ORA — ' + newPrice;
+  document.getElementById('cta-main').href = 'https://an1i5s-vn.myshopify.com/cart/53570563113301:1';
+}
+
+// FAQ accordion
+function toggleFaq(el) {
+  el.closest('.faq-item').classList.toggle('open');
+}
+
+// Watchers counter (random fluctuation)
+(function() {
+  const base = 14;
+  let n = base;
+  setInterval(() => {
+    n = Math.max(8, Math.min(23, n + (Math.random() > 0.5 ? 1 : -1)));
+    const el = document.getElementById('watchers-count');
+    if(el) el.textContent = n;
+  }, 4700);
+})();
+
+// Scarcity bar animation
+window.addEventListener('load', () => {
+  const bar = document.querySelector('.progress-bar');
+  if(bar) { bar.style.width = '0'; setTimeout(() => { bar.style.width = '74%'; }, 300); }
+});
+</script>
+
+</body>
+</html>
