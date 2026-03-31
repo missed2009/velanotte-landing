@@ -30,7 +30,17 @@
   .contact-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--oro); margin-bottom: 4px; }
   .contact-value { font-size: 15px; font-weight: 500; color: var(--bianco); }
   .contact-note { font-size: 12px; color: var(--grigio); margin-top: 4px; }
-  a { color: var(--rosa); text-decoration: none; }
+  .wa-btn {
+    display: inline-block;
+    background: #25D366;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    margin-top: 8px;
+  }
   .response-time {
     background: rgba(212,132,156,0.06);
     border: 1px solid rgba(212,132,156,0.15);
@@ -41,6 +51,7 @@
     margin-top: 32px;
     line-height: 1.7;
   }
+  a { color: var(--rosa); text-decoration: none; }
   footer { text-align: center; padding: 24px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: var(--grigio); }
   footer a { color: var(--grigio); text-decoration: none; margin: 0 10px; }
 </style>
@@ -55,20 +66,21 @@
 
 <div class="content">
   <h1>Contatti</h1>
-  <p class="subtitle">Hai domande su un ordine, una spedizione o il prodotto?<br>Siamo qui per aiutarti.</p>
+  <p class="subtitle">Hai domande su un ordine, una spedizione o il prodotto?<br>Siamo qui per aiutarti su WhatsApp.</p>
 
   <div class="contact-card">
-    <div class="contact-icon">✉️</div>
+    <div class="contact-icon">💬</div>
     <div>
-      <div class="contact-label">Email assistenza</div>
-      <div class="contact-value"><a href="mailto:velanotte@supporto.com">velanotte@supporto.com</a></div>
-      <div class="contact-note">Risposta entro 24–48 ore lavorative</div>
+      <div class="contact-label">WhatsApp Business</div>
+      <div class="contact-value">Assistenza clienti</div>
+      <div class="contact-note">Risposta entro 24 ore · Lun–Sab</div>
+      <a href="#" class="wa-btn" style="margin-top:12px;display:inline-block;">Scrivici su WhatsApp</a>
     </div>
   </div>
 
   <div class="response-time">
     <strong style="color:var(--bianco);">📦 Hai già ordinato?</strong><br>
-    Inserisci il numero d'ordine nella tua email — ti risponderemo più velocemente.
+    Inviaci il numero d'ordine su WhatsApp — ti risponderemo più velocemente.
     Il numero si trova nell'email di conferma ordine che ti abbiamo inviato.
   </div>
 </div>
